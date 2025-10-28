@@ -1,11 +1,22 @@
 const express = require('express');
+const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
-// Configure multer for file uploads
+app.use((req, res, next) => {
+  res.header('X-Content-Type-Options', 'nosniff');
+  res.header('X-Frame-Options', 'DENY');
+  res.header('X-XSS-Protection', '1; mode=block');
+  next();
+});
+
+app.options('*', cors(corsOptions));
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const uploadDir = path.join(__dirname, 'uploads');
@@ -22,7 +33,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 5 * 1024 * 1024 }, 
   fileFilter: function (req, file, cb) {
     const allowedTypes = /jpeg|jpg|png|gif/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
@@ -36,23 +47,10 @@ const upload = multer({
   }
 });
 
-// Serve uploaded files statically
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-// Enable CORS for frontend
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-  next();
-});
 
 const DATA_DIR = path.join(__dirname, 'data');
 
-// Dummy user data (replace with file if needed)
 const USERS_FILE = 'users.json';
 function getUsers() {
   try {
@@ -62,7 +60,6 @@ function getUsers() {
   }
 }
 // --- LOGIN ENDPOINT ---
-// POST /login { email, password, role }
 app.post('/login', (req, res) => {
   const { email, password, role } = req.body;
   if (!email || !password || !role) {
@@ -73,7 +70,6 @@ app.post('/login', (req, res) => {
   if (!user) {
     return res.status(401).json({ error: 'Invalid credentials or role' });
   }
-  // For demo, return user info (no JWT/session)
   res.json({ message: 'Login successful', user: { email: user.email, role: user.role, name: user.name } });
 });
 
@@ -86,7 +82,6 @@ function writeJson(file, data) {
 }
 
 // --- JOBS CRUD ---
-// Get all jobs (with config)
 app.get('/jobs', (req, res) => {
   const jobs = readJson('jobs.json');
   const jobConfig = readJson('job_config.json');
@@ -170,7 +165,6 @@ app.post('/upload', upload.single('photo'), (req, res) => {
 });
 
 // --- JOB CONFIG CRUD ---
-// Get job config
 app.get('/job-config', (req, res) => {
   res.json(readJson('job_config.json'));
 });
@@ -182,7 +176,6 @@ app.put('/job-config', (req, res) => {
 });
 
 // --- CANDIDATES CRUD ---
-// Get all candidates
 app.get('/candidates', (req, res) => {
   res.json(readJson('candidates.json'));
 });
