@@ -15,7 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.options('*', cors(corsOptions));
+app.options('*', cors());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
