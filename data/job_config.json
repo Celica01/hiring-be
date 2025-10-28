@@ -1,0 +1,19 @@
+{
+  "application_form": {
+    "sections": [
+      {
+        "title": "Minimum Profile Information Required",
+        "fields": [
+          { "key": "full_name", "validation": { "required": true } },
+          { "key": "photo_profile", "validation": { "required": true } },
+          { "key": "gender", "validation": { "required": true } },
+          { "key": "domicile", "validation": { "required": false } },
+          { "key": "email", "validation": { "required": true } },
+          { "key": "phone_number", "validation": { "required": true } },
+          { "key": "linkedin_link", "validation": { "required": true } },
+          { "key": "date_of_birth", "validation": { "required": false } }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "email": "admin@hiringapp.com",
+      "password": "123456",
+      "role": "admin",
+      "name": "Recruiter Admin"
+    },
+    {
+      "email": "applicant@hiringapp.com",
+      "password": "123456",
+      "role": "applicant",
+      "name": "Job Seeker"
+    }
+  ]
+}

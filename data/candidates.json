@@ -1,0 +1,65 @@
+{
+  "data": [
+    {
+      "id": "cand_1761675181563_8899",
+      "job_id": "job_20251028_7385",
+      "job_title": "SENIOR FRONT-END ENGINER",
+      "attributes": [
+        {
+          "key": "photo_profile",
+          "label": "Photo Profile",
+          "value": "photo-1761675150781.jpg",
+          "order": 1
+        },
+        {
+          "key": "full_name",
+          "label": "Full Name",
+          "value": "Tita Mulyana",
+          "order": 2
+        },
+        {
+          "key": "phone_number",
+          "label": "Phone Number",
+          "value": "+62 881023928095",
+          "order": 3
+        },
+        {
+          "key": "email",
+          "label": "Email",
+          "value": "titamulyana10@gmail.com",
+          "order": 4
+        },
+        {
+          "key": "date_of_birth",
+          "label": "Date Of Birth",
+          "value": "1998-06-18",
+          "order": 5
+        },
+        {
+          "key": "gender",
+          "label": "Gender",
+          "value": "Male",
+          "order": 6
+        },
+        {
+          "key": "domicile",
+          "label": "Domicile",
+          "value": "kota-jakarta-pusat-dki-jakarta",
+          "order": 7
+        },
+        {
+          "key": "linkedin_link",
+          "label": "Linkedin Link",
+          "value": "https://www.linkedin.com/in/titamulyana",
+          "order": 8
+        },
+        {
+          "key": "photo_profile",
+          "label": "Photo Profile",
+          "value": "/uploads/profile-1761675181547-763313463.jpg",
+          "order": 9
+        }
+      ]
+    }
+  ]
+}

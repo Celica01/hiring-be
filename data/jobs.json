@@ -1,0 +1,158 @@
+{
+  "data": [
+    {
+      "id": "job_20251028_7385",
+      "title": "SENIOR FRONT-END ENGINER",
+      "slug": "senior-front-end-enginer",
+      "job_type": "contract",
+      "description": "1. DEVELOPMENT WEBSITE\n2. DEVELOPMENT MOBILE\n3. DEVELOPMENT WITH JAVASCRIPT\n",
+      "num_candidates": 1,
+      "status": "active",
+      "salary_range": {
+        "min": 1000000,
+        "max": 10000000,
+        "currency": "IDR",
+        "display_text": "Rp1,000,000 - Rp10,000,000"
+      },
+      "list_card": {
+        "badge": "Active",
+        "started_on_text": "started on 29 Oct 2025",
+        "cta": "Manage Job"
+      },
+      "application_form": {
+        "sections": [
+          {
+            "title": "Profile Information",
+            "fields": [
+              {
+                "key": "full_name",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "photo_profile",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "gender",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "domicile",
+                "validation": {
+                  "required": false
+                }
+              },
+              {
+                "key": "email",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "phone_number",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "linkedin_link",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "date_of_birth",
+                "validation": {
+                  "required": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "job_20251028_0263",
+      "title": "BACKEND",
+      "slug": "backend",
+      "job_type": "part-time",
+      "description": "* Terbiasa menggunakan NestJs\n* Terbiasa dengan posgresql",
+      "num_candidates": 1,
+      "status": "active",
+      "salary_range": {
+        "min": 10000000,
+        "max": 11000000,
+        "currency": "IDR",
+        "display_text": "Rp10,000,000 - Rp11,000,000"
+      },
+      "list_card": {
+        "badge": "Active",
+        "started_on_text": "started on 29 Oct 2025",
+        "cta": "Manage Job"
+      },
+      "application_form": {
+        "sections": [
+          {
+            "title": "Profile Information",
+            "fields": [
+              {
+                "key": "full_name",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "photo_profile",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "gender",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "domicile",
+                "validation": {
+                  "required": false
+                }
+              },
+              {
+                "key": "email",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "phone_number",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "linkedin_link",
+                "validation": {
+                  "required": true
+                }
+              },
+              {
+                "key": "date_of_birth",
+                "validation": {
+                  "required": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
