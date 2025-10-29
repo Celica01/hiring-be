@@ -29,25 +29,24 @@ app.use((req, res, next) => {
 // ============================================
 
 // Option 1: Disk Storage (untuk local development)
-// Uncomment ini untuk development lokal.
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     const uploadDir = path.join(__dirname, 'uploads');
-//     if (!fs.existsSync(uploadDir)) {
-//       fs.mkdirSync(uploadDir, { recursive: true });
-//     }
-//     cb(null, uploadDir);
-//   },
-//   filename: function (req, file, cb) {
-//     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-//     cb(null, 'profile-' + uniqueSuffix + path.extname(file.originalname));
-//   }
-// });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const uploadDir = path.join(__dirname, 'uploads');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, 'profile-' + uniqueSuffix + path.extname(file.originalname));
+  }
+});
 
 
 // Option 2: Memory Storage (untuk Vercel/Production)
-const storage = multer.memoryStorage();
+// const storage = multer.memoryStorage();
 
 const upload = multer({ 
   storage: storage,
