@@ -60,6 +60,67 @@
           "order": 9
         }
       ]
+    },
+    {
+      "id": "cand_1761704145792_4158",
+      "job_id": "job_20251028_0263",
+      "job_title": "BACKEND",
+      "attributes": [
+        {
+          "key": "full_name",
+          "label": "Full Name",
+          "value": "Tita",
+          "order": 1
+        },
+        {
+          "key": "phone_number",
+          "label": "Phone Number",
+          "value": "+62 023928095",
+          "order": 2
+        },
+        {
+          "key": "email",
+          "label": "Email",
+          "value": "titamulyana10@gmail.com",
+          "order": 3
+        },
+        {
+          "key": "date_of_birth",
+          "label": "Date Of Birth",
+          "value": "1997-06-11",
+          "order": 4
+        },
+        {
+          "key": "gender",
+          "label": "Gender",
+          "value": "Male",
+          "order": 5
+        },
+        {
+          "key": "domicile",
+          "label": "Domicile",
+          "value": "kota-jakarta-pusat-dki-jakarta",
+          "order": 6
+        },
+        {
+          "key": "linkedin_link",
+          "label": "Linkedin Link",
+          "value": "https://www.linkedin.com/in/titamul",
+          "order": 7
+        },
+        {
+          "key": "photo_profile",
+          "label": "Photo Profile",
+          "value": "photo-1761704141279.jpg",
+          "order": 8
+        },
+        {
+          "key": "photo_profile",
+          "label": "Photo Profile",
+          "value": "/uploads/profile-1761704145759-817042747.jpg",
+          "order": 9
+        }
+      ]
     }
   ]
 }

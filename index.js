@@ -3,6 +3,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
 const app = express();
 
 app.use(cors());
@@ -17,19 +18,8 @@ app.use((req, res, next) => {
 
 app.options('*', cors());
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, 'uploads');
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir);
-    }
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, 'profile-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
+// Use memory storage for Vercel compatibility (read-only filesystem)
+const storage = multer.memoryStorage();
 
 const upload = multer({ 
   storage: storage,
@@ -47,7 +37,8 @@ const upload = multer({
   }
 });
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Store files in memory cache (for development/testing)
+const fileCache = new Map();
 
 const DATA_DIR = path.join(__dirname, 'data');
 
@@ -152,13 +143,46 @@ app.post('/upload', upload.single('photo'), (req, res) => {
       return res.status(400).json({ error: 'No file uploaded' });
     }
     
+    // Generate unique filename
+    const fileId = uuidv4();
+    const fileExtension = path.extname(req.file.originalname);
+    const filename = `profile-${fileId}${fileExtension}`;
+    
+    // Store file in memory cache with base64 encoding
+    const base64Data = req.file.buffer.toString('base64');
+    fileCache.set(filename, {
+      buffer: req.file.buffer,
+      base64: base64Data,
+      mimetype: req.file.mimetype,
+      originalName: req.file.originalname,
+      uploadedAt: new Date().toISOString()
+    });
+    
     // Return file URL
-    const fileUrl = `/uploads/${req.file.filename}`;
+    const fileUrl = `/uploads/${filename}`;
     res.json({ 
       success: true,
       url: fileUrl,
-      filename: req.file.filename 
+      filename: filename 
     });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Serve uploaded files from memory cache
+app.get('/uploads/:filename', (req, res) => {
+  try {
+    const filename = req.params.filename;
+    const fileData = fileCache.get(filename);
+    
+    if (!fileData) {
+      return res.status(404).json({ error: 'File not found' });
+    }
+    
+    res.set('Content-Type', fileData.mimetype);
+    res.set('Content-Length', fileData.buffer.length);
+    res.send(fileData.buffer);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
