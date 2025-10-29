@@ -6,19 +6,23 @@ const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: false
+}));
+
+app.options('*', cors());
+
 app.use(express.json());
 
 app.use((req, res, next) => {
   res.header('X-Content-Type-Options', 'nosniff');
-  res.header('X-Frame-Options', 'DENY');
   res.header('X-XSS-Protection', '1; mode=block');
   next();
 });
 
-app.options('*', cors());
-
-// Use memory storage for Vercel compatibility (read-only filesystem)
 const storage = multer.memoryStorage();
 
 const upload = multer({ 
@@ -37,7 +41,6 @@ const upload = multer({
   }
 });
 
-// Store files in memory cache (for development/testing)
 const fileCache = new Map();
 
 const DATA_DIR = path.join(__dirname, 'data');
