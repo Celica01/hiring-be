@@ -29,8 +29,8 @@ app.use((req, res, next) => {
 // ============================================
 
 // Option 1: Disk Storage (untuk local development)
-// Uncomment ini untuk development lokal, comment untuk production/Vercel
-/*
+// Uncomment ini untuk development lokal.
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const uploadDir = path.join(__dirname, 'uploads');
@@ -44,11 +44,10 @@ const storage = multer.diskStorage({
     cb(null, 'profile-' + uniqueSuffix + path.extname(file.originalname));
   }
 });
-*/
+
 
 // Option 2: Memory Storage (untuk Vercel/Production)
-// Default untuk production - file disimpan di memory
-const storage = multer.memoryStorage();
+// const storage = multer.memoryStorage();
 
 const upload = multer({ 
   storage: storage,
@@ -66,7 +65,6 @@ const upload = multer({
   }
 });
 
-// Serve static files untuk disk storage (jika digunakan)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Memory cache untuk memory storage

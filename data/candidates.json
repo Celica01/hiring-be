@@ -121,6 +121,67 @@
           "order": 9
         }
       ]
+    },
+    {
+      "id": "cand_1761709320497_1518",
+      "job_id": "job_20251028_7385",
+      "job_title": "SENIOR FRONT-END ENGINER",
+      "attributes": [
+        {
+          "key": "photo_profile",
+          "label": "Photo Profile",
+          "value": "photo-1761709280490.jpg",
+          "order": 1
+        },
+        {
+          "key": "full_name",
+          "label": "Full Name",
+          "value": "Eri",
+          "order": 2
+        },
+        {
+          "key": "date_of_birth",
+          "label": "Date Of Birth",
+          "value": "2025-10-30",
+          "order": 3
+        },
+        {
+          "key": "gender",
+          "label": "Gender",
+          "value": "Male",
+          "order": 4
+        },
+        {
+          "key": "domicile",
+          "label": "Domicile",
+          "value": "kabupaten-aceh-selatan-aceh",
+          "order": 5
+        },
+        {
+          "key": "phone_number",
+          "label": "Phone Number",
+          "value": "+62 81023928095",
+          "order": 6
+        },
+        {
+          "key": "email",
+          "label": "Email",
+          "value": "titamulya@gmail.com",
+          "order": 7
+        },
+        {
+          "key": "linkedin_link",
+          "label": "Linkedin Link",
+          "value": "https://www.linkedin.com/in/eri",
+          "order": 8
+        },
+        {
+          "key": "photo_profile",
+          "label": "Photo Profile",
+          "value": "/uploads/profile-dc330d8a-91b9-4228-a7ea-62556c692709.jpg",
+          "order": 9
+        }
+      ]
     }
   ]
 }
