@@ -3,7 +3,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 const app = express();
 
 app.use(cors({
@@ -78,7 +78,6 @@ function readJson(file) {
     const filePath = path.join(DATA_DIR, file);
     if (!fs.existsSync(filePath)) {
       console.error(`File not found: ${filePath}`);
-      // Return default empty structure based on file name
       if (file === 'jobs.json') return { jobs: [] };
       if (file === 'candidates.json') return { data: [] };
       if (file === 'job_config.json') return { application_form: [] };
@@ -87,7 +86,6 @@ function readJson(file) {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
   } catch (error) {
     console.error(`Error reading ${file}:`, error.message);
-    // Return safe defaults
     if (file === 'jobs.json') return { jobs: [] };
     if (file === 'candidates.json') return { data: [] };
     if (file === 'job_config.json') return { application_form: [] };
@@ -98,7 +96,6 @@ function readJson(file) {
 function writeJson(file, data) {
   try {
     const filePath = path.join(DATA_DIR, file);
-    // Check if directory exists, if not create it
     if (!fs.existsSync(DATA_DIR)) {
       console.log(`Creating directory: ${DATA_DIR}`);
       fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -106,8 +103,7 @@ function writeJson(file, data) {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
   } catch (error) {
     console.error(`Error writing ${file}:`, error.message);
-    // On Vercel, we can't write to disk, so just log the error
-    // In production, you should use a database instead
+
   }
 }
 
@@ -182,8 +178,8 @@ app.post('/upload', upload.single('photo'), (req, res) => {
       return res.status(400).json({ error: 'No file uploaded' });
     }
     
-    // Generate unique filename
-    const fileId = uuidv4();
+    // Generate unique filename using crypto
+    const fileId = crypto.randomUUID();
     const fileExtension = path.extname(req.file.originalname);
     const filename = `profile-${fileId}${fileExtension}`;
     
