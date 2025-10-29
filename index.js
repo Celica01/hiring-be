@@ -48,8 +48,14 @@ const DATA_DIR = path.join(__dirname, 'data');
 const USERS_FILE = 'users.json';
 function getUsers() {
   try {
-    return JSON.parse(fs.readFileSync(path.join(DATA_DIR, USERS_FILE), 'utf8'));
+    const filePath = path.join(DATA_DIR, USERS_FILE);
+    if (!fs.existsSync(filePath)) {
+      console.error(`Users file not found: ${filePath}`);
+      return { users: [] };
+    }
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
   } catch (e) {
+    console.error('Error reading users file:', e.message);
     return { users: [] };
   }
 }
@@ -68,11 +74,41 @@ app.post('/login', (req, res) => {
 });
 
 function readJson(file) {
-  return JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), 'utf8'));
+  try {
+    const filePath = path.join(DATA_DIR, file);
+    if (!fs.existsSync(filePath)) {
+      console.error(`File not found: ${filePath}`);
+      // Return default empty structure based on file name
+      if (file === 'jobs.json') return { jobs: [] };
+      if (file === 'candidates.json') return { data: [] };
+      if (file === 'job_config.json') return { application_form: [] };
+      return {};
+    }
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch (error) {
+    console.error(`Error reading ${file}:`, error.message);
+    // Return safe defaults
+    if (file === 'jobs.json') return { jobs: [] };
+    if (file === 'candidates.json') return { data: [] };
+    if (file === 'job_config.json') return { application_form: [] };
+    return {};
+  }
 }
 
 function writeJson(file, data) {
-  fs.writeFileSync(path.join(DATA_DIR, file), JSON.stringify(data, null, 2));
+  try {
+    const filePath = path.join(DATA_DIR, file);
+    // Check if directory exists, if not create it
+    if (!fs.existsSync(DATA_DIR)) {
+      console.log(`Creating directory: ${DATA_DIR}`);
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  } catch (error) {
+    console.error(`Error writing ${file}:`, error.message);
+    // On Vercel, we can't write to disk, so just log the error
+    // In production, you should use a database instead
+  }
 }
 
 // --- JOBS CRUD ---
